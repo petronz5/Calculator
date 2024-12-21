@@ -1,17 +1,17 @@
 html{
-    box-sizing: border-box;
+    box-sizing: border-box; /* il browser calcola la larghezza e l'altezza dei box in base al contenuto che li contiene */
     height: 100%;
 }
 
 *, *::before, *::after{
-    box-sizing: inherit;
-    margin: 0;
-    padding: 0;
+    box-sizing: inherit;  /* Li prende dal genitore html */
+    margin: 0;  /* Elimina il margine */
+    padding: 0; /* Elimina lo spazio tra il contenuto di un elemento e il suo bordo */
 }
 
 body{
     display: flex;
-    align-items: center;
+    align-items: center;  /* Centra il contenuto verticale */
     background: linear-gradient(320deg, #eb92be, #ffef78, #63c9b4);
     font-family: 'Dosier', sans-serif;
     font-display: swap;
@@ -55,6 +55,7 @@ body{
     display: flex;
     justify-content: space-between;
     margin: 5% 0;
+    gap: 10px;
 }
 
 .calc-button{
@@ -71,7 +72,7 @@ body{
     height: 65px;
 }
 
-.calc-button:last-child{
+.calc-button:last-child {
     backdrop-filter: blur(5.5px);
     -webkit-backdrop-filter: blur(5.5px);
     background-color: 255, 255, 255, 0.75;
@@ -81,6 +82,7 @@ body{
     color: #fff;
     background-color: #d72880;
 }
+
 
 .calc-button:last-child:hover{
     background-color: inherit;

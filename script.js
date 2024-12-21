@@ -4,6 +4,26 @@ let previousOperator;
 
 const screen = document.querySelector('.screen');
 
+
+document.addEventListener('keydown', function(event) {
+    if (event.key >= '0' && event.key <= '9') {
+      handleNumberInput(event.key);
+    } else if (event.key === 'Backspace') {
+      handleBackspace();
+    }
+  });
+
+  function handleNumberInput(key) {
+    buffer += key;
+    screen.innerText = buffer;
+  }
+  
+  
+  function handleBackspace() {
+    buffer = buffer.slice(0, -1);
+    screen.innerText = buffer;
+  }
+
 function buttonClick(value){
     if(isNaN(value)){
         handleSymbol(value);
@@ -36,6 +56,16 @@ function handleSymbol(symbol){
                 buffer = buffer.substring(0 , buffer.length - 1);
             }
             break;
+        case '√': 
+            buffer = Math.sqrt(parseFloat(buffer)).toString();
+            break;
+        case 'x²':
+            buffer = (parseFloat(buffer) ** 2 ).toString();
+            break;
+        case 'x³': 
+            buffer = (parseFloat(buffer) ** 3).toString();
+            break;
+        case 'x^y':
         case '+':
         case '−':
         case '×':
@@ -73,6 +103,8 @@ function flushOperation(intBuffer){
         runningTotal *= intBuffer;
     }else if(previousOperator === '÷'){
         runningTotal /= intBuffer;
+    }else if(previousOperator === 'x^y'){
+        runningTotal = Math.pow(runningTotal, intBuffer);
     }
 }
 
