@@ -8,20 +8,51 @@ const screen = document.querySelector('.screen');
 document.addEventListener('keydown', function(event) {
     if (event.key >= '0' && event.key <= '9') {
       handleNumberInput(event.key);
-    } else if (event.key === 'Backspace') {
+    } else if (event.key === '.') {
+      handleDecimalInput();
+    } else if (event.key === 'Backspace' || event.key === 'Delete') {
       handleBackspace();
-    }
+    } else if (event.key === '+') {
+      handleOperator('+');
+    } else if (event.key === '-') {
+      handleOperator('-');
+    } else if (event.key === '*') {
+      handleOperator('×');
+    } else if (event.key === '/') {
+      handleOperator('÷');
+    } 
   });
-
+  
   function handleNumberInput(key) {
-    buffer += key;
+    if (buffer === '0') {
+      buffer = key;
+    } else {
+      buffer += key;
+    }
     screen.innerText = buffer;
   }
   
+  function handleDecimalInput() {
+    if (!buffer.includes('.')) {
+      buffer += '.';
+      screen.innerText = buffer;
+    }
+  }
   
   function handleBackspace() {
     buffer = buffer.slice(0, -1);
     screen.innerText = buffer;
+    if (buffer === '') {
+      buffer = '0';
+      screen.innerText = buffer;
+    }
+  }
+  
+  function handleOperator(operator) {
+    previousOperator = operator;
+    runningTotal = parseFloat(buffer);
+    buffer = '';
+    screen.innerText = '0';
   }
 
 function buttonClick(value){
